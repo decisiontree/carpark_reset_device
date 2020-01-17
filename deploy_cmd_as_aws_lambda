@@ -1,0 +1,8 @@
+echo "This command did the installation"
+rm -r function.zip package
+pip3 install --target ./package pandas datetime psycopg2-binary
+cd package/
+zip -r9 ${OLDPWD}/function.zip .
+cd $OLDPWD
+zip -g function.zip confglobal.py lambda_function.py  rds_table_operate.py config.py read_dataframe.py database.ini
+aws lambda update-function-code --function-name RDS_dev_reset --zip-file fileb://function.zip
