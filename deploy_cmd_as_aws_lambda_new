@@ -5,4 +5,4 @@ cd package/
 zip -r9 ${OLDPWD}/function.zip .
 cd $OLDPWD
 zip -g function.zip confglobal.py lambda_function.py  rds_table_operate.py config.py read_dataframe.py database.ini
-aws lambda update-function-code --function-name carpark_reset_device --zip-file fileb://function.zip  --cli-connect-timeout 0
+aws lambda create-function --function-name carpark_reset_device --runtime python3.7 --zip-file fileb://function.zip --handler lambda_function.lambda_handler --role arn:aws:iam::854531041726:role/service-role/trigger_ec2_car_check-role-lbpp6y5r --cli-connect-timeout 0

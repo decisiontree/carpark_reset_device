@@ -13,14 +13,10 @@ def connect_aws(sectionName):
 def exec(connection, cursor, query):
     #connection = sql_connect.exec()
     #cursor = connection.cursor()
-    try:
-        cursor.execute( query )
-        names = [ x[0] for x in cursor.description]
-        rows = cursor.fetchall()
-        return pd.DataFrame( [tuple(row) for row in rows], columns=names)
-    finally:
-        if cursor is not None:
-            cursor.close()
+    cursor.execute( query )
+    names = [ x[0] for x in cursor.description]
+    rows = cursor.fetchall()
+    return pd.DataFrame( [tuple(row) for row in rows], columns=names)
 
 
 if __name__ == "__main__":
@@ -29,6 +25,4 @@ if __name__ == "__main__":
     sql_code = "select * from public.smart_parking limit 10"
     df = exec(conn, cur , sql_code)
     print(df)
-
-
 
